@@ -10,7 +10,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
+import com.ctre.phoenix.motorcontrol.can.*;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.IterativeRobotBase;
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -18,20 +24,39 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * project.
  */
 public class Robot extends TimedRobot {
+  Joystick joy1;
+  Joystick joy2;
+  SpeedController m_frontLeft = new WPI_TalonSRX(6);
+   SpeedController m_rearLeft = new WPI_TalonSRX(1);
+   SpeedControllerGroup m_left = new SpeedControllerGroup(m_frontLeft, m_rearLeft);
+
+   SpeedController m_frontRight = new WPI_TalonSRX(4);
+   SpeedController m_rearRight = new WPI_TalonSRX(7);
+   SpeedControllerGroup m_right = new SpeedControllerGroup(m_frontRight, m_rearRight);
+
+   DifferentialDrive m_drive = new DifferentialDrive(m_left, m_right);
+ 
+
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-
+  
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
   @Override
   public void robotInit() {
+
+  
+
+
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
   }
+
+  
 
   /**
    * This function is called every robot packet, no matter the mode. Use this for items like
@@ -96,6 +121,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+
+    double joystickLeft = joy1.getRawAxis(1);
+    double joystickRight = joy2.getRawAxis(3);
+
+    m_drive.tankDrive(joystickLeft,joystickRight);
   }
 
   @Override
