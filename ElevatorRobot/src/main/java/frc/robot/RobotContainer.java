@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj.Joystick;
+// import edu.wpi.first.wpilibj.Joystick;
 
 
 /**
@@ -21,14 +21,18 @@ import edu.wpi.first.wpilibj.Joystick;
  * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
  * (including subsystems, commands, and button mappings) should be declared here.
  */
+
+  // Joystick joy1= new Joystick(1);
+  // Joystick joy2= new Joystick(5);
+
 public class RobotContainer {
+  
+
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
-  // joystickLeft = new Joystick(1);
-  // joystickRight = new Joystick(3);
+  
 
   
     //import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -43,6 +47,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    
   }
 
   /**
@@ -51,6 +56,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
+  // Joystick joy1= new Joystick(1);
+  // Joystick joy2= new Joystick(5);
   private void configureButtonBindings() {
   }
 

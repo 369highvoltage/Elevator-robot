@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.IterativeRobotBase;
+import edu.wpi.first.wpilibj.drive.*;
+
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -24,8 +26,9 @@ import edu.wpi.first.wpilibj.IterativeRobotBase;
  * project.
  */
 public class Robot extends TimedRobot {
-  Joystick joy1;
-  Joystick joy2;
+  Joystick joy1= new Joystick(0);
+  // Joystick joy2= new Joystick(5);
+  
   SpeedController m_frontLeft = new WPI_TalonSRX(6);
    SpeedController m_rearLeft = new WPI_TalonSRX(1);
    SpeedControllerGroup m_left = new SpeedControllerGroup(m_frontLeft, m_rearLeft);
@@ -122,11 +125,16 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
-    double joystickLeft = joy1.getRawAxis(1);
-    double joystickRight = joy2.getRawAxis(3);
+   
+    double leftSpeed= joy1.getRawAxis(1);
+    System.out.println(leftSpeed);
+    double rightSpeed= joy1.getRawAxis(3);
+    System.out.println(rightSpeed);
 
-    m_drive.tankDrive(joystickLeft,joystickRight);
-  }
+    m_drive.tankDrive(leftSpeed,rightSpeed);
+   }
+
+    
 
   @Override
   public void testInit() {
