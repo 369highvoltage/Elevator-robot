@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.IterativeRobotBase;
 import edu.wpi.first.wpilibj.drive.*;
+import frc.robot.subsystems.DriveSystem;;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -26,19 +27,11 @@ import edu.wpi.first.wpilibj.drive.*;
  * project.
  */
 public class Robot extends TimedRobot {
+  // DriveSystem Controller = new DriveSystem();
   Joystick joy1= new Joystick(0);
   // Joystick joy2= new Joystick(5);
   
-  SpeedController m_frontLeft = new WPI_TalonSRX(6);
-   SpeedController m_rearLeft = new WPI_TalonSRX(1);
-   SpeedControllerGroup m_left = new SpeedControllerGroup(m_frontLeft, m_rearLeft);
-
-   SpeedController m_frontRight = new WPI_TalonSRX(4);
-   SpeedController m_rearRight = new WPI_TalonSRX(7);
-   SpeedControllerGroup m_right = new SpeedControllerGroup(m_frontRight, m_rearRight);
-
-   DifferentialDrive m_drive = new DifferentialDrive(m_left, m_right);
- 
+  
 
   private Command m_autonomousCommand;
 
@@ -126,12 +119,11 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
 
    
-    double leftSpeed= joy1.getRawAxis(1);
+    double leftSpeed = - joy1.getRawAxis(1);
     System.out.println(leftSpeed);
-    double rightSpeed= joy1.getRawAxis(3);
+    double rightSpeed= - joy1.getRawAxis(5);
     System.out.println(rightSpeed);
-
-    m_drive.tankDrive(leftSpeed,rightSpeed);
+    m_robotContainer.drivingSystem.tankDrive(leftSpeed, rightSpeed);
    }
 
     
